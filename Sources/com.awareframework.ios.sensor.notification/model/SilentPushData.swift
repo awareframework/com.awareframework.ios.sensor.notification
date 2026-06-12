@@ -3,7 +3,7 @@ import GRDB
 import com_awareframework_ios_core
 
 public struct SilentPushData: BaseDbModelSQLite {
-    public static let databaseTableName = "silentPushData"
+    public static let databaseTableName = "ios_silent_push"
     public static let TABLE_NAME = databaseTableName
 
     public var id: Int64?

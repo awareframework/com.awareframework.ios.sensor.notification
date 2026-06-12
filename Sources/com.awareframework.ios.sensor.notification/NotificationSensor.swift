@@ -133,21 +133,14 @@ public class NotificationSensor: AwareSensor {
     }
 
     public override func sync(force: Bool = false) {
-        guard let engine = self.dbEngine else { return }
-        engine.startSync(DbSyncConfig().apply { config in
-            config.debug = self.CONFIG.debug
-            config.dispatchQueue = DispatchQueue(label: "com.awareframework.ios.sensor.notification.sync.queue")
-            config.completionHandler = { status, error in
-                var userInfo: [String: Any] = [NotificationSensor.EXTRA_STATUS: status]
-                if let error = error {
-                    userInfo[NotificationSensor.EXTRA_ERROR] = error
-                }
-                self.notificationCenter.post(
-                    name: .actionAwareNotificationSyncCompletion,
-                    object: self,
-                    userInfo: userInfo)
-            }
-        })
+        guard let engine = self.dbEngine, let syncConfig = self.syncConfig else { return }
+        syncConfig.debug = self.CONFIG.debug
+        syncConfig.completionHandler = { status, error in
+            var userInfo: [String: Any] = [NotificationSensor.EXTRA_STATUS: status]
+            if let error = error { userInfo[NotificationSensor.EXTRA_ERROR] = error }
+            self.notificationCenter.post(name: .actionAwareNotificationSyncCompletion, object: self, userInfo: userInfo)
+        }
+        engine.startSync(syncConfig)
         self.notificationCenter.post(name: .actionAwareNotificationSync, object: self)
     }
 

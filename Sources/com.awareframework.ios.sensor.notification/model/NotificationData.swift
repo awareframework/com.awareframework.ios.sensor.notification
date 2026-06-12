@@ -3,7 +3,7 @@ import GRDB
 import com_awareframework_ios_core
 
 public struct NotificationData: BaseDbModelSQLite {
-    public static let databaseTableName = "notificationData"
+    public static let databaseTableName = "ios_notification"
     public static let TABLE_NAME = databaseTableName
 
     public var id: Int64?
