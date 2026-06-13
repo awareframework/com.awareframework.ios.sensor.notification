@@ -155,6 +155,7 @@ public class NotificationSensor: AwareSensor {
     func handle(notification: UNNotification) {
         let content = notification.request.content
         var data = NotificationData()
+        data.timestamp = Int64(Date().timeIntervalSince1970 * 1000)
         data.notificationId = notification.request.identifier
         data.title = content.title
         data.body = content.body
@@ -185,6 +186,7 @@ public class NotificationSensor: AwareSensor {
         if CONFIG.debug { print(NotificationSensor.TAG, "APNs token:", tokenString) }
 
         var tokenData = NotificationTokenData()
+        tokenData.timestamp = Int64(Date().timeIntervalSince1970 * 1000)
         tokenData.token = tokenString
         tokenData.label = CONFIG.label
 
@@ -209,6 +211,7 @@ public class NotificationSensor: AwareSensor {
         if CONFIG.debug { print(NotificationSensor.TAG, "Silent push received:", payloadString) }
 
         var data = SilentPushData()
+        data.timestamp = Int64(Date().timeIntervalSince1970 * 1000)
         data.payload = payloadString
         data.label = CONFIG.label
 

@@ -5,7 +5,7 @@
 This sensor module captures push notification events using the UserNotifications framework. It records notifications received while the app is in the foreground, stores APNs device tokens, and handles silent push notifications — including built-in commands for triggering data sync, restarting sensors, or applying remote configuration updates.
 
 ## Requirements
-iOS 13 or later
+iOS 14 or later
 
 ## Installation
 
