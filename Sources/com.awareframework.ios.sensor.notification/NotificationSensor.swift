@@ -103,7 +103,7 @@ public class NotificationSensor: AwareSensor {
 
     public override func start() {
         delegateProxy.sensor = self
-        previousDelegate = notificationCenter_UN.delegate as? (UNUserNotificationCenterDelegate & AnyObject)
+        previousDelegate = notificationCenter_UN.delegate
         delegateProxy.chainedDelegate = previousDelegate
         notificationCenter_UN.delegate = delegateProxy
 
